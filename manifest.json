@@ -1,0 +1,17 @@
+{
+  "name": "Redmine color tagger",
+  "description": "Customize redmine table row colors",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {},
+  "icons": {
+    "64": "icon64.png"
+  },
+  "content_scripts": [
+   {
+     "matches": ["http://redmine.nutnetdev.ru/issues*"],
+     "css": [],
+     "js": ["main.js"]
+   }
+ ]
+}
