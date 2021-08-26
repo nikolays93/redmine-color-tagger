@@ -1,0 +1,22 @@
+#context-menu .rctagger:hover > ul {
+  display: flex !important;
+  flex-wrap: wrap;
+}
+#context-menu .rctagger ul > li:first-child {
+  flex: 1 1 100%;
+  max-width: 100%;
+  font-size: inherit;
+  text-align: center;
+}
+#context-menu .rctagger ul > li:first-child a {
+  padding-right: 20px;
+}
+#context-menu .rctagger ul > li {
+  flex: 1 1 16.6665%;
+  max-width: 16.6665%;
+  font-size: 0;
+}
+#context-menu .rctagger ul > li > a {
+  display: block;
+  height: 16px;
+}
