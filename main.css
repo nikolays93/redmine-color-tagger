@@ -1,3 +1,6 @@
+table.issues .newbie {
+  background-color: #AAF0D1;
+}
 #context-menu .rctagger:hover > ul {
   display: flex !important;
   flex-wrap: wrap;
