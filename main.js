@@ -46,63 +46,58 @@ const issuesStorage = class {
 const issuesStorageList = new issuesStorage();
 issuesStorageList.refresh();
 
-function createColorItem(child) {
+function createColorItem(color) {
+	let colorEl = document.createElement('a');
+	colorEl.href = 'javascript:;';
+	colorEl.style.background = color.code;
+	colorEl.title = color.name || '';
+	colorEl.text = color.text || '';
+
+	colorEl.addEventListener('click', function() {
+		issuesStorageList.add(focusedIssueId, color.code).refresh();
+		document.body.click();
+	});
+
 	const item = document.createElement('li');
-	item.appendChild(child);
+	item.appendChild(colorEl);
 	return item;
 };
 
 const colorList = document.createElement('ul');
 const colors = [
 	{
-		code: '',
-		text: 'Сбросить',
+		code: '#FF6080',
+		name: 'Красный',
 	},
 	{
-		code: '#ff6080',
-		text: 'Красный',
+		code: '#FFFFE0',
+		name: 'Желтый',
 	},
 	{
-		code: 'lightyellow',
-		text: 'Желтый',
+		code: '#B284BE',
+		name: 'Фиолетовый',
 	},
 	{
-		code: '#aaf0d1',
-		text: 'Зеленый',
+		code: '#7CB9E8',
+		name: 'Синий',
 	},
 	{
-		code: '#b284be',
-		text: 'Фиолетовый',
+		code: '#9AB3CC',
+		name: '',
 	},
 	{
-		code: '#7cb9e8',
-		text: 'Синий',
-	},
-	{
-		code: '#9ab3cc',
-		text: '',
-	},
-	{
-		code: '#d7eff7',
-		text: '',
+		code: '#D7EFF7',
+		name: '',
 	},
 	{
 		code: '#F5D0FE',
-		text: 'Fuchsia 200',
+		name: 'Фуксия',
 	},
 ];
 
+colorList.appendChild(createColorItem({code: '', text: 'Сбросить'}));
 colors.forEach(function(color) {
-	let colorEl = document.createElement('a');
-	colorEl.href = 'javascript:;';
-	colorEl.style.background = color.code;
-	colorEl.text = color.text;
-	colorEl.addEventListener('click', function() {
-		issuesStorageList.add(focusedIssueId, color.code).refresh();
-		document.body.click();
-	});
-
-	colorList.appendChild(createColorItem(colorEl));
+	colorList.appendChild(createColorItem(color));
 });
 
 const rcTaggerMenuItem = document.createElement('li');
