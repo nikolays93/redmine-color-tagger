@@ -4,45 +4,47 @@ const issuesStorage = class {
 	constructor() {
 		this.__storageKey = 'rctagger';
 		this.table = document.querySelector('table.issues');
-		this.issues = JSON.parse(localStorage.getItem(`${this.__storageKey}.issues`)) || {};
-		this.__refresh();
-
-		console.log('init issues', this.issues);
+		this.issues =  this.__get() || {};
 	}
 
-	__refresh() {
+	refresh() {
 		this.table.querySelectorAll('tr').forEach(function(tr) {
 			tr.style.background = '';
 		});
 
 		for (var id in this.issues) {
+			if (!this.table.querySelector('#' + id)) {
+				this.delete(id);
+				continue;
+			}
+
 			this.table.querySelector('#' + id).style.background = this.issues[id];
 		}
-
-		console.log('refresh table', this.table);
 	}
 
-	__update() {
-		localStorage.setItem(`${this.__storageKey}.issues`, JSON.stringify(this.issues));
-		this.__refresh();
+	__get() {
+		return JSON.parse(localStorage.getItem(`${this.__storageKey}.issues`));
+	}
 
-		console.log('set issue color', this.issues);
+	__set(issues) {
+		localStorage.setItem(`${this.__storageKey}.issues`, JSON.stringify(issues));
 	}
 
 	add(issueId, color) {
 		this.issues[issueId] = color;
-		color ? this.__update() : this.delete(issueId);
+		color ? this.__set(this.issues) : this.delete(issueId);
+		return this;
 	}
 
 	delete(issueId) {
 		delete this.issues[issueId];
-		this.__update();
-
-		console.log('delete', issueId);
+		this.__set(this.issues);
+		return this;
 	}
 }
 
 const issuesStorageList = new issuesStorage();
+issuesStorageList.refresh();
 
 function createColorItem(child) {
 	const item = document.createElement('li');
@@ -84,7 +86,7 @@ colors.forEach(function(color) {
 	colorEl.style.background = color.code;
 	colorEl.text = color.text;
 	colorEl.addEventListener('click', function() {
-		issuesStorageList.add(focusedIssueId, color.code);
+		issuesStorageList.add(focusedIssueId, color.code).refresh();
 		document.body.click();
 	});
 
