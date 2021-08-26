@@ -78,6 +78,18 @@ const colors = [
 		code: '#7cb9e8',
 		text: 'Синий',
 	},
+	{
+		code: '#9ab3cc',
+		text: '',
+	},
+	{
+		code: '#d7eff7',
+		text: '',
+	},
+	{
+		code: '#F5D0FE',
+		text: 'Fuchsia 200',
+	},
 ];
 
 colors.forEach(function(color) {
