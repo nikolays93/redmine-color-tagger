@@ -9,7 +9,7 @@
   },
   "content_scripts": [
    {
-     "matches": ["http://redmine.nutnetdev.ru/issues*"],
+     "matches": ["http://redmine.nutnetdev.ru/issues?*"],
      "css": ["main.css"],
      "js": ["main.js"]
    }
