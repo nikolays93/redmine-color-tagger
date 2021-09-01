@@ -1,5 +1,11 @@
+@keyframes blinker {
+  50% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
 table.issues .newbie {
-  background-color: #AAF0D1;
+  background-color: rgba(170, 240, 209, 1);
+  animation: blinker 2s linear infinite;
 }
 #context-menu .rctagger:hover > ul {
   display: flex !important;
