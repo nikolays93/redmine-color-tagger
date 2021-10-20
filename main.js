@@ -49,7 +49,7 @@ const issuesStorage = class {
 }
 
 function getParam($param) {
-	return (new URL(document.location)).searchParams.get('v[assigned_to_id][]');
+	return (new URL(document.location)).searchParams.get($param);
 }
 
 const issuesStorageList = new issuesStorage();
