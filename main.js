@@ -48,9 +48,15 @@ const issuesStorage = class {
 	}
 }
 
+function getParam($param) {
+	return (new URL(document.location)).searchParams.get('v[assigned_to_id][]');
+}
+
 const issuesStorageList = new issuesStorage();
-issuesStorageList.refresh();
-issuesStorageList.clear();
+if ('me' === getParam('v[assigned_to_id][]') && 'o' === getParam('op[status_id]')) {
+	issuesStorageList.refresh();
+	issuesStorageList.clear();
+}
 
 function createColorItem(color) {
 	let colorEl = document.createElement('a');
